@@ -42,7 +42,7 @@ class WeatherDisplay extends Component {
       <div>
         <h1>
         {city} - {weather.description} 
-          <img src={iconUrl} />
+          <img src={iconUrl} alt={weather.description} />
         </h1>
         <p>Сейчас: {weatherData.main.temp}°C</p>
         <p>Максимум: {weatherData.main.temp_max}°C</p>
