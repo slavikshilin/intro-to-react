@@ -13,9 +13,20 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>Погода по городам</title>
+    <style type="text/css">
+      #footer {
+       position: fixed; /* Фиксированное положение */
+       left: 0; bottom: 0; /* Левый нижний угол */
+       padding: 10px; /* Поля вокруг текста */
+       background: #39b54a; /* Цвет фона */
+       color: #fff; /* Цвет текста */
+       width: 100%; /* Ширина слоя */
+      }
+     </style>    
   </head>
   <body>
+    
     <div id="root"></div>
     <!--
       This HTML file is a template.
@@ -28,4 +39,7 @@
       To create a production bundle, use `npm run build`.
     -->
   </body>
+  <div id="footer">
+      &copy; Вячеслав Шилин
+     </div>  
 </html>
