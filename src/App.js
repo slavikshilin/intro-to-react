@@ -6,43 +6,48 @@ import "./App.css";
 import { Navbar, NavItem, Nav, Grid, Row, Col } from "react-bootstrap";
 
 const PLACES = [
-  { name: "Palo Alto", zip: "94303" },
-  { name: "San Jose", zip: "94088" },
-  { name: "Santa Cruz", zip: "95062" },
-  { name: "Honolulu", zip: "96803" }
+  { name: "Москва", id: "524894" },
+  { name: "Минск", id: "625144" },
+  { name: "Бишкек", id: "1528334" },
 ];
 
 class WeatherDisplay extends Component {
+  
   constructor() {
     super();
     this.state = {
-      weatherData: null
+      weatherData: null,
+      city: null
     };
   }
+
   componentDidMount() {
-    const zip = this.props.zip;
-    const URL = "http://api.openweathermap.org/data/2.5/weather?q=" +
-      zip +
-      "&appid=b1b35bba8b434a28a0be2a3e1071ae5b&units=imperial";
+    const id = this.props.id;
+    const city = this.props.city;
+    const URL = "http://api.openweathermap.org/data/2.5/weather?id=" +
+      id +
+      "&appid=b1b35bba8b434a28a0be2a3e1071ae5b&units=metric&lang=ru";
     fetch(URL).then(res => res.json()).then(json => {
-      this.setState({ weatherData: json });
+      this.setState({ weatherData: json, city: city });
     });
   }
+  
   render() {
     const weatherData = this.state.weatherData;
-    if (!weatherData) return <div>Loading</div>;
+    const city = this.state.city;
+    if (!weatherData) return <div>Загрузка</div>;
     const weather = weatherData.weather[0];
     const iconUrl = "http://openweathermap.org/img/w/" + weather.icon + ".png";
     return (
       <div>
         <h1>
-          {weather.main} in {weatherData.name}
+          {weather.description} в {city}
           <img src={iconUrl} />
         </h1>
-        <p>Current: {weatherData.main.temp}°</p>
-        <p>High: {weatherData.main.temp_max}°</p>
-        <p>Low: {weatherData.main.temp_min}°</p>
-        <p>Wind Speed: {weatherData.wind.speed} mi/hr</p>
+        <p>Сейчас: {weatherData.main.temp}°C</p>
+        <p>Максимум: {weatherData.main.temp_max}°C</p>
+        <p>Мнимум: {weatherData.main.temp_min}°C</p>
+        <p>Скорость ветра: {weatherData.wind.speed} м/сек</p>
       </div>
     );
   }
@@ -62,15 +67,14 @@ class App extends Component {
         <Navbar>
           <Navbar.Header>
             <Navbar.Brand>
-              React Simple Weather App
+              Погода по городам на сегодня
             </Navbar.Brand>
-            <a href="https://github.com/ericvicenti/intro-to-react">Learn to build me</a>
           </Navbar.Header>
         </Navbar>
         <Grid>
           <Row>
             <Col md={4} sm={4}>
-              <h3>Select a city</h3>
+              <h3>Выберите город</h3>
               <Nav
                 bsStyle="pills"
                 stacked
@@ -85,7 +89,7 @@ class App extends Component {
               </Nav>
             </Col>
             <Col md={8} sm={8}>
-              <WeatherDisplay key={activePlace} zip={PLACES[activePlace].zip} />
+              <WeatherDisplay key={activePlace} id={PLACES[activePlace].id} city={PLACES[activePlace].name} />
             </Col>
           </Row>
         </Grid>
