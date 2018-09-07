@@ -41,7 +41,7 @@ class WeatherDisplay extends Component {
     return (
       <div>
         <h1>
-          {weather.description} в {city}
+        {city} - {weather.description} 
           <img src={iconUrl} />
         </h1>
         <p>Сейчас: {weatherData.main.temp}°C</p>
