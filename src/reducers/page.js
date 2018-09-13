@@ -12,7 +12,7 @@ export function pageReducer(state = initialState, action) {
   switch (action.type) {
     case REQUESTED_WEATHER:
       {
-        let newState = { ...state, isFetching: true };
+        let newState = { ...state, err: null, isFetching: true };
         return newState;
       }
 
