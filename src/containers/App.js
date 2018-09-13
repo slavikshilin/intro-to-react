@@ -42,7 +42,7 @@ class App extends Component {
             <div className="row">
                 {PLACES.map((place, index) => (
                     <div key={index} className="col">
-                      <button id={index} className="btn btn-outline-success btn-lg btn-block" onClick={() => setWeatherAction(index, PLACES[page.activePlace].id)}>{place.name}</button>
+                      <button id={index} className="btn btn-outline-success btn-lg btn-block" onClick={() => setWeatherAction(index, PLACES[index].id)}>{place.name}</button>
                     </div>
                   ))}
               </div>
